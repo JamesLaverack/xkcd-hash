@@ -32,7 +32,6 @@ int main(int argv, char **argc) {
     input_hexed[RANDOM_BUFFER_SIZE*2] = '\0';
     FILE* urandom = fopen("/dev/urandom", "r");
     
-    
     // Parse input
     string_to_hex(argc[1], goal);
 
@@ -44,14 +43,14 @@ int main(int argv, char **argc) {
     while(1){
         // Loop and find a better one
         do{
-            // Get random data
-            *input = fread(input, 1, RANDOM_BUFFER_SIZE, urandom);
-            //*input = 'a';
+            // Get a new random chunk
+            fread(input, 1, RANDOM_BUFFER_SIZE, urandom);
+            
             // Hex represent it
             for(int i=0;i<RANDOM_BUFFER_SIZE;i++) {
                 sprintf(input_hexed+i*2, "%x", input[i]);
             }
-            
+
             // Hash
             Hash(1024, input_hexed, strlen(input_hexed)*8, hash);
             
