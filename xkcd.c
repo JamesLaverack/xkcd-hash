@@ -60,7 +60,7 @@ int main(int argv, char **argc) {
             for(int i=0;i<128;i++) {
                 distance += __builtin_popcount(hash[i]^goal[i]);
             }
-        }while(distance>best_distance);
+        }while(distance>=best_distance);
         
         // Report
         printf("======================   RESULT    ======================\n");
@@ -86,3 +86,4 @@ int main(int argv, char **argc) {
     free(hash);
     free(input);
 }
+
